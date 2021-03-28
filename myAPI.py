@@ -15,6 +15,7 @@ class WebsocketBase(WebSocketHandler):
 
     def data_received(self, chunk):
         """接收消息"""
+        print (chunk)
 
     def open(self):
         """新的websocket连接后被调动"""
@@ -28,13 +29,17 @@ class WebsocketBase(WebSocketHandler):
         """重写同源检查 解决跨域问题"""
         return True
 
+ws_clients = []
 
 class RealData(WebsocketBase):
     """实时数据"""
-    def on_message(self, args):
+    def on_message(self, chunk):
   		# """args 是请求参数"""
   		# TODO 实际的业务操作,只需在此处写自己的业务逻辑即可。
         self.write_message('啦啦啦')		# 向客户端返回数据，如果是字典、列表这些数据类型，需要json.dumps()  
+        print (chunk)
+        print (self)
+        ws_clients.append(self)
 
 
 class WebSocketApplication(Application):
@@ -118,6 +123,8 @@ def send_message():
         #       for conn in WEBSOCKET_DICT.values():
         #               conn.send(json.dumps({'data':'new message'}))
 
+                for cli in ws_clients:
+                        cli.write_message(msg)
                 return jsonify(status="OK" )
  
     
