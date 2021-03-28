@@ -48,7 +48,6 @@ class WebSocketApplication(Application):
 
 app = Flask(__name__)
 WEBSOCKET_DICT = {}  
-
 @app.route('/api/assign3/get_chatrooms', methods=['GET'])
 def get_chatrooms():
         mydb = MyDatabase.MyDatabase()
@@ -97,8 +96,7 @@ def get_messages():
         elif page < total_page:
                 for i in range(10):
                                 chat_message.append(message_list[(page-1)*10+i])
-        chat_message.append({'current_page':page})
-        return jsonify(status="OK",data=chat_message)
+        return jsonify(status="OK",data=json.dumps({ "current_page": page, "totals_pages": total_page, "messages": chat_message}))
 
 @app.route('/api/assign3/send_message', methods=['POST'])
 def send_message():
