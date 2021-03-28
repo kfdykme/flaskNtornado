@@ -126,7 +126,7 @@ def send_message():
         #               conn.send(json.dumps({'data':'new message'}))
 
 
-                ws_msg = { "roomId": chatroom_id, "userId": user_id, "name": name, "msg": msg, "time": str_time}
+                ws_msg = { "chatroom_id": chatroom_id, "user_id": user_id, "name": name, "message": msg, "message_time": str_time}
                 for cli in ws_clients:
                         try :
                                 cli.write_message(json.dumps(ws_msg))
