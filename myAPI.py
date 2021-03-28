@@ -96,7 +96,8 @@ def get_messages():
         elif page < total_page:
                 for i in range(10):
                                 chat_message.append(message_list[(page-1)*10+i])
-        return jsonify(status="OK",data=json.dumps({ "current_page": page, "totals_pages": total_page, "messages": chat_message}))
+        databean = { "current_page": page, "totals_pages": total_page, "messages": chat_message}
+        return jsonify(status="OK",data=databean)
 
 @app.route('/api/assign3/send_message', methods=['POST'])
 def send_message():
