@@ -117,18 +117,18 @@ def send_message():
         else :
                 insert_query = "INSERT INTO messages (chatroom_id,user_id,name,message,message_time) VALUES (%s,%s,%s,%s,%s)"
                 
-                time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time()+8*3600)
+                str_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time()+8*3600))
 
-                params = (chatroom_id,user_id,name,msg,time))
+                params = (chatroom_id,user_id,name,msg,str_time)
                 mydb.cursor.execute(insert_query,params)
                 mydb.db.commit()
         #       for conn in WEBSOCKET_DICT.values():
         #               conn.send(json.dumps({'data':'new message'}))
 
 
-                ws_msg = { "roomId": chatroom_id, "userId": user_id, "msg": msg, "time", time}
+                ws_msg = { "roomId": chatroom_id, "userId": user_id, "msg": msg, "time": str_time}
                 for cli in ws_clients:
-                        cli.write_message()
+                        cli.write_message(jsonify(data=ws_msg))
                 return jsonify(status="OK" )
  
     
