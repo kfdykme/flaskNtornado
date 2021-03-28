@@ -128,7 +128,7 @@ def send_message():
 
                 ws_msg = { "roomId": chatroom_id, "userId": user_id, "name": name, "msg": msg, "time": str_time}
                 for cli in ws_clients:
-                        if (cli.ws_connection.is_closing()) 
+                        if cli.ws_connection.is_closing()
                                 print ("cli is closed")
                         else 
                                 cli.write_message(json.dumps(ws_msg))
