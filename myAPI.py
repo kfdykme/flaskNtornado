@@ -126,9 +126,9 @@ def send_message():
         #               conn.send(json.dumps({'data':'new message'}))
 
 
-                ws_msg = { "roomId": chatroom_id, "userId": user_id, "msg": msg, "time": str_time}
+                ws_msg = { "roomId": chatroom_id, "userId": user_id, name: name, "msg": msg, "time": str_time}
                 for cli in ws_clients:
-                        cli.write_message(json.dumps(ws_msg)))
+                        cli.write_message(json.dumps(ws_msg))
                 return jsonify(status="OK" )
  
     
