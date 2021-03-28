@@ -13,7 +13,7 @@ class MyDatabase:
                 return
         def connect(self):
                 self.db = pymysql.connect(
-                                host = "43.128.7.176",
+                                host = "localhost",
                                 port = 3306,
                                 user = "chyer",
                                 passwd = "password",
